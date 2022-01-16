@@ -64,7 +64,7 @@ for h in options:
 	for i in range(1,31):
 		for j in range(1,31):
 			#print(str(h) + " " + str(i) + " " + str(j), end = "\r")
-			resultsarray[i-1,j-1] = DeepFace.verify(img1_path = "original/"+str(i)+"/5.jpg", img2_path = "compression/compression_"+str(h)+"/"+str(j)+"/1.jpg", model=model)['distance']
+			resultsarray[i-1,j-1] = DeepFace.verify(img1_path = "original/"+str(i)+"/5.jpg", img2_path = comparisontype+"/"+comparisontype+"_"+str(h)+"/"+str(j)+"/1.jpg", model=model)['distance']
 	results.append(resultsarray)
 	print("Compression level " + str(h) + " done.")
 	totaltime = time.perf_counter() - starttime2
@@ -76,7 +76,7 @@ print("Compression comparisons done! Total execution time: " + str(time.strftime
 
 #Save results to datafile for further processing
 data = asarray(results)
-save('saved_comparison_data/'+comparisontype+'/'+modelname+'/original_vs_compressions.npy', data)
+save('saved_comparison_data/'+comparisontype+'/'+modelname+'/original_vs_'+comparisontype+'s.npy', data)
 print("Data saved!")
 
 
@@ -91,7 +91,7 @@ for y in options:
 	for i in range(1,31):
 		for j in range(1,31):
 			#print(str(i) + " " + str(j), end = "\r")
-			resultsarray[i-1,j-1] = DeepFace.verify(img1_path = "compression/compression_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = "original/"+str(j)+"/1.jpg", model=model)['distance']
+			resultsarray[i-1,j-1] = DeepFace.verify(img1_path = comparisontype+"/"+comparisontype+"_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = "original/"+str(j)+"/1.jpg", model=model)['distance']
 	results.append(resultsarray)
 
 	print("Compression with original comparison done!")
@@ -108,7 +108,7 @@ for y in options:
 		for i in range(1,31):
 			for j in range(1,31):
 				#print(str(h) + " " + str(i) + " " + str(j), end = "\r")
-				resultsarray[i-1,j-1] = DeepFace.verify(img1_path = "compression/compression_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = "compression/compression_"+str(h)+"/"+str(j)+"/1.jpg", model=model)['distance']
+				resultsarray[i-1,j-1] = DeepFace.verify(img1_path = comparisontype+"/"+comparisontype+"_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = comparisontype+"/"+comparisontype+"_"+str(h)+"/"+str(j)+"/1.jpg", model=model)['distance']
 		results.append(resultsarray)
 		print("Compression level " + str(h) + " done.")
 		totaltime = time.perf_counter() - starttime2
@@ -122,7 +122,7 @@ for y in options:
 
 	#Save results to datafile for further processing
 	data = asarray(results)
-	save('saved_comparison_data/'+comparisontype+'/'+modelname+'/compression_'+str(y)+'_vs_compressions.npy', data)
+	save('saved_comparison_data/'+comparisontype+'/'+modelname+'/'+comparisontype+'_'+str(y)+'_vs_'+comparisontype+'s.npy', data)
 	print("Data saved!")
 
 totaltime = time.perf_counter() - abs_starttime
