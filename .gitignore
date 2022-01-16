@@ -1,0 +1,9 @@
+data.npy
+pyvenv.cfg
+Untitled.ipynb
+Untitled1.ipynb
+*.ipynb_checkpoints
+Include
+Lib
+Scripts
+share
