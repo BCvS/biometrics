@@ -57,7 +57,7 @@ totaltime = time.perf_counter() - starttime
 print("Execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 
 #Now compare original front to compressed side
-print("Running original vs compression comparison...")
+print("Running original vs  "+comparisontype + " comparison...")
 starttime2 = time.perf_counter()
 for h in options:
 	resultsarray = np.zeros((30,30))
@@ -66,13 +66,13 @@ for h in options:
 			#print(str(h) + " " + str(i) + " " + str(j), end = "\r")
 			resultsarray[i-1,j-1] = DeepFace.verify(img1_path = "original/"+str(i)+"/5.jpg", img2_path = comparisontype+"/"+comparisontype+"_"+str(h)+"/"+str(j)+"/1.jpg", model=model)['distance']
 	results.append(resultsarray)
-	print("Compression level " + str(h) + " done.")
+	print(comparisontype + " level " + str(h) + " done.")
 	totaltime = time.perf_counter() - starttime2
 	print("Execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 	starttime2 = time.perf_counter()
 
 totaltime = time.perf_counter() - starttime
-print("Compression comparisons done! Total execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
+print("Original vs "+comparisontype+ " comparisons done! Total execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 
 #Save results to datafile for further processing
 data = asarray(results)
@@ -81,12 +81,12 @@ print("Data saved!")
 
 
 for y in options:
-	print("Running the entire thing again but with reference image compression level " + str(y))
+	print("Running the entire thing again but with reference image "+ comparisontype+ " level "+ str(y))
 	#do main task, start by comparing original front to original side
 	starttime = time.perf_counter()
 	results = []
 
-	print("Running compression with original comparison...")
+	print("Running " +comparisontype+ "s with original comparison...")
 	resultsarray = np.zeros((30,30))
 	for i in range(1,31):
 		for j in range(1,31):
@@ -94,14 +94,14 @@ for y in options:
 			resultsarray[i-1,j-1] = DeepFace.verify(img1_path = comparisontype+"/"+comparisontype+"_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = "original/"+str(j)+"/1.jpg", model=model)['distance']
 	results.append(resultsarray)
 
-	print("Compression with original comparison done!")
+	print(comparisontype+"s with original comparison done!")
 	totaltime = time.perf_counter() - starttime
 	print("Execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 
 
 
 	#Now compare original front to compressed side
-	print("Running compression level " + str(y) + " vs compression comparison...")
+	print("Running "+comparisontype+ " level " + str(y) + " vs "+comparisontype+ "s comparison...")
 	starttime2 = time.perf_counter()
 	for h in options:
 		resultsarray = np.zeros((30,30))
@@ -110,13 +110,13 @@ for y in options:
 				#print(str(h) + " " + str(i) + " " + str(j), end = "\r")
 				resultsarray[i-1,j-1] = DeepFace.verify(img1_path = comparisontype+"/"+comparisontype+"_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = comparisontype+"/"+comparisontype+"_"+str(h)+"/"+str(j)+"/1.jpg", model=model)['distance']
 		results.append(resultsarray)
-		print("Compression level " + str(h) + " done.")
+		print(comparisontype + " level " + str(h) + " done.")
 		totaltime = time.perf_counter() - starttime2
 		print("Execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 		starttime2 = time.perf_counter()
 
 	totaltime = time.perf_counter() - starttime
-	print("Compression comparisons done! Total execution time for this round: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
+	print(comparisontype +"s comparisons done! Total execution time for this round: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 	totaltime = time.perf_counter() - abs_starttime
 	print("Time elapsed so far: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 
