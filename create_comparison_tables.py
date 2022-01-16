@@ -6,16 +6,32 @@ import numpy as np
 from numpy import asarray
 from numpy import save
 
+modelname = "DeepFace" #choices: [Deepface, VGG-Face, FaceNet, OpenFace]
+comparisontype = "resolution" #choices: [resolution, compression, brightness, noise]
+
+abs_starttime = time.perf_counter()
+
+print("Using the " + modelname + " model to compare " + comparisontype + ". Check if this is correct.")
+
+options = []
+if (comparisontype == 'resolution'):
+	options = [1024, 512, 256, 128, 64]
+elif (comparisontype == 'compression'):
+	options = [9,7,5,3,1]
+elif (comparisontype == 'brightness'):
+	options = [0.1,0.5,1.5,3,5]
+elif (comparisontype == 'noise'):
+	options == [0.1, 0.3, 0.5, 0.7, 1];
 
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 device_lib.list_local_devices()
 
-print("Building model...")
-model = DeepFace.build_model("FaceNet")
+print("Building " + modelname + " model...")
+model = DeepFace.build_model(modelname)
 print("Model built!")
 
 #Smol test before starting main task
-print("Running test of 10 comparisons...")
+print("Running a short test of 10 comparisons...")
 starttime = time.perf_counter()
 
 for i in range(1,10):
@@ -43,7 +59,7 @@ print("Execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))
 #Now compare original front to compressed side
 print("Running original vs compression comparison...")
 starttime2 = time.perf_counter()
-for h in [1,3,5,7,9]:
+for h in options:
 	resultsarray = np.zeros((30,30))
 	for i in range(1,31):
 		for j in range(1,31):
@@ -60,11 +76,11 @@ print("Compression comparisons done! Total execution time: " + str(time.strftime
 
 #Save results to datafile for further processing
 data = asarray(results)
-save('original_vs_compressions.npy', data)
+save('saved_comparison_data/'+comparisontype+'/'+modelname+'/original_vs_compressions.npy', data)
 print("Data saved!")
 
 
-for y in [1,3,5,7,9]:
+for y in options:
 	print("Running the entire thing again but with reference image compression level " + str(y))
 	#do main task, start by comparing original front to original side
 	starttime = time.perf_counter()
@@ -87,7 +103,7 @@ for y in [1,3,5,7,9]:
 	#Now compare original front to compressed side
 	print("Running compression level " + str(y) + " vs compression comparison...")
 	starttime2 = time.perf_counter()
-	for h in [1,3,5,7,9]:
+	for h in options:
 		resultsarray = np.zeros((30,30))
 		for i in range(1,31):
 			for j in range(1,31):
@@ -101,10 +117,14 @@ for y in [1,3,5,7,9]:
 
 	totaltime = time.perf_counter() - starttime
 	print("Compression comparisons done! Total execution time for this round: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
+	totaltime = time.perf_counter() - abs_starttime
+	print("Time elapsed so far: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 
 	#Save results to datafile for further processing
 	data = asarray(results)
-	save('compression_'+str(y)+'_vs_compressions.npy', data)
+	save('saved_comparison_data/'+comparisontype+'/'+modelname+'/compression_'+str(y)+'_vs_compressions.npy', data)
 	print("Data saved!")
 
+totaltime = time.perf_counter() - abs_starttime
+print("All done! Total execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 print("Shutting down script.")
