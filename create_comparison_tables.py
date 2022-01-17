@@ -5,6 +5,7 @@ from tensorflow.python.client import device_lib
 import numpy as np
 from numpy import asarray
 from numpy import save
+import os
 
 modelname = "DeepFace" #choices: [Deepface, VGG-Face, FaceNet, OpenFace]
 comparisontype = "compression" #choices: [resolution, compression, brightness, noise]
