@@ -113,7 +113,7 @@ for comparisontype in comparisontypes:
 		for i in range(1,31):
 			for j in range(1,31):
 				#print(str(i) + " " + str(j), end = "\r")
-				resultsarray[i-1,j-1] = DeepFace.verify(img1_path = 'faces/'+comparisontype+"/"+comparisontype+"_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = "original/"+str(j)+"/1.jpg", detector_backend='skip', model=model)['distance']
+				resultsarray[i-1,j-1] = DeepFace.verify(img1_path = 'faces/'+comparisontype+"/"+comparisontype+"_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = "faces/original/"+str(j)+"/1.jpg", detector_backend='skip', model=model)['distance']
 		results.append(resultsarray)
 
 		print(comparisontype+"s with original comparison done!")
