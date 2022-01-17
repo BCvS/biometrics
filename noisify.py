@@ -17,7 +17,8 @@ for i in [0.1, 0.3, 0.5, 0.7, 1]:
 	parent_dir = req_dir
 	compressionpath = 'noise_' + str(i)
 	path = os.path.join(parent_dir, compressionpath)
-	os.mkdir(path)
+	if not os.path.exists(path):
+		os.mkdir(path)
 	parent_dir = path
 	for j in range(1,31):
 		directory = str(j)

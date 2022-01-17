@@ -15,7 +15,8 @@ for i in [1024, 512, 256, 128, 64]:
 	parent_dir = req_dir
 	compressionpath = 'resolution_' + str(i)
 	path = os.path.join(parent_dir, compressionpath)
-	os.mkdir(path)
+	if not os.path.exists(path):
+		os.mkdir(path)
 	parent_dir = path
 	for j in range(1,31):
 		directory = str(j)

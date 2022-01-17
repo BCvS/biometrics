@@ -15,20 +15,15 @@ for i in [1,3,5,7,9]:
 	parent_dir = req_dir
 	compressionpath = 'compression_' + str(i)
 	path = os.path.join(parent_dir, compressionpath)
-	os.mkdir(path)
+	if not os.path.exists(path):
+		os.mkdir(path)
 	parent_dir = path
 	for j in range(1,31):
 		directory = str(j)
 		path = os.path.join(parent_dir, directory)
 		if not os.path.exists(path):
 			os.mkdir(path)
-
-
-# parent_dir = "C:/Users/spijk/Documents/_assignment/biometrics_data/compression_5"
-# for i in range(1,31):
-# 	directory = str(i)
-# 	path = os.path.join(parent_dir, directory)
-# 	os.mkdir(path)
+print("Directories generated")
 
 def compress_with_given_quality(image_path, output_path, quality=10):
     img = Image.open(image_path)

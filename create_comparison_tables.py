@@ -38,7 +38,7 @@ elif (comparisontype == 'compression'):
 elif (comparisontype == 'brightness'):
 	options = [0.1,0.5,1.5,3,5]
 elif (comparisontype == 'noise'):
-	options == [0.1, 0.3, 0.5, 0.7, 1];
+	options = [0.1, 0.3, 0.5, 0.7, 1];
 
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 device_lib.list_local_devices()
@@ -52,7 +52,7 @@ print("Running a short test of 10 comparisons...")
 starttime = time.perf_counter()
 
 for i in range(1,10):
-	print(DeepFace.verify(img1_path = "original/"+str(i)+"/5.jpg", img2_path = "original/1/1.jpg", model=model)['distance'], end = "\r")
+	print(DeepFace.verify(img1_path = "faces/original/"+str(i)+"/5.jpg", img2_path = "faces/original/1/1.jpg", model=model)['distance'], end = "\r")
 
 totaltime = time.perf_counter() - starttime
 print("Total test execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
@@ -66,7 +66,7 @@ resultsarray = np.zeros((30,30))
 for i in range(1,31):
 	for j in range(1,31):
 		#print(str(i) + " " + str(j), end = "\r")
-		resultsarray[i-1,j-1] = DeepFace.verify(img1_path = "original/"+str(i)+"/5.jpg", img2_path = "original/"+str(j)+"/1.jpg", model=model)['distance']
+		resultsarray[i-1,j-1] = DeepFace.verify(img1_path = "faces/original/"+str(i)+"/5.jpg", img2_path = "faces/original/"+str(j)+"/1.jpg", model=model)['distance']
 results.append(resultsarray)
 
 print("Originals comparison done!")
@@ -81,7 +81,7 @@ for h in options:
 	for i in range(1,31):
 		for j in range(1,31):
 			#print(str(h) + " " + str(i) + " " + str(j), end = "\r")
-			resultsarray[i-1,j-1] = DeepFace.verify(img1_path = "original/"+str(i)+"/5.jpg", img2_path = comparisontype+"/"+comparisontype+"_"+str(h)+"/"+str(j)+"/1.jpg", model=model)['distance']
+			resultsarray[i-1,j-1] = DeepFace.verify(img1_path = "faces/original/"+str(i)+"/5.jpg", img2_path = 'faces/'+comparisontype+"/"+comparisontype+"_"+str(h)+"/"+str(j)+"/1.jpg", model=model)['distance']
 	results.append(resultsarray)
 	print(comparisontype + " level " + str(h) + " done.")
 	totaltime = time.perf_counter() - starttime2
@@ -108,7 +108,7 @@ for y in options:
 	for i in range(1,31):
 		for j in range(1,31):
 			#print(str(i) + " " + str(j), end = "\r")
-			resultsarray[i-1,j-1] = DeepFace.verify(img1_path = comparisontype+"/"+comparisontype+"_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = "original/"+str(j)+"/1.jpg", model=model)['distance']
+			resultsarray[i-1,j-1] = DeepFace.verify(img1_path = 'faces/'+comparisontype+"/"+comparisontype+"_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = "original/"+str(j)+"/1.jpg", model=model)['distance']
 	results.append(resultsarray)
 
 	print(comparisontype+"s with original comparison done!")
@@ -125,7 +125,7 @@ for y in options:
 		for i in range(1,31):
 			for j in range(1,31):
 				#print(str(h) + " " + str(i) + " " + str(j), end = "\r")
-				resultsarray[i-1,j-1] = DeepFace.verify(img1_path = comparisontype+"/"+comparisontype+"_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = comparisontype+"/"+comparisontype+"_"+str(h)+"/"+str(j)+"/1.jpg", model=model)['distance']
+				resultsarray[i-1,j-1] = DeepFace.verify(img1_path = 'faces/'+comparisontype+"/"+comparisontype+"_"+str(y)+"/"+str(i)+"/5.jpg", img2_path = 'faces/'+comparisontype+"/"+comparisontype+"_"+str(h)+"/"+str(j)+"/1.jpg", model=model)['distance']
 		results.append(resultsarray)
 		print(comparisontype + " level " + str(h) + " done.")
 		totaltime = time.perf_counter() - starttime2

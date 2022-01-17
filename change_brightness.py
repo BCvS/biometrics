@@ -15,7 +15,8 @@ for i in [0.1,0.5,1.5,3,5]:
 	parent_dir = "C:/Users/spijk/Documents/_assignment/biometrics_data/images/brightness"
 	compressionpath = 'brightness_' + str(i)
 	path = os.path.join(parent_dir, compressionpath)
-	os.mkdir(path)
+	if not os.path.exists(req_dir):
+		os.mkdir(path)
 	parent_dir = path
 	for j in range(1,31):
 		directory = str(j)
