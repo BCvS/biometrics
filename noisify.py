@@ -3,8 +3,18 @@ import os
 from PIL import Image
 from skimage.util import random_noise
 
+current_dir = os.getcwd()
+
+req_dir = current_dir + '/images'
+if not os.path.exists(req_dir):
+	os.mkdir(req_dir)
+
+req_dir = req_dir + '/noise'
+if not os.path.exists(req_dir):
+	os.mkdir(req_dir)
+
 for i in [0.1, 0.3, 0.5, 0.7, 1]:
-	parent_dir = "C:/Users/spijk/Documents/_assignment/biometrics_data/noise"
+	parent_dir = req_dir
 	compressionpath = 'noise_' + str(i)
 	path = os.path.join(parent_dir, compressionpath)
 	os.mkdir(path)
@@ -12,7 +22,8 @@ for i in [0.1, 0.3, 0.5, 0.7, 1]:
 	for j in range(1,31):
 		directory = str(j)
 		path = os.path.join(parent_dir, directory)
-		os.mkdir(path)
+		if not os.path.exists(path):
+			os.mkdir(path)
 print("Directories generated")
 
 def noisify(image_path, output_path, strength):
@@ -25,10 +36,8 @@ def noisify(image_path, output_path, strength):
 
 if __name__ == '__main__':
 	for h in [0.1, 0.3, 0.5, 0.7, 1]:
-		image_path_basis = "C:/Users/spijk/Documents/_assignment/biometrics_data/noise"
-		output_path_basis = os.path.join("C:/Users/spijk/Documents/_assignment/biometrics_data/noise", "noise_" + str(h))
 		for i in range(1,31):
 			for j in range(1,10):
-				noisify('original/'+str(i)+'/'+str(j)+'.jpg', 'noise/noise_'+str(h)+'/'+str(i)+'/'+str(j)+'.jpg', h)
+				noisify('images/original/'+str(i)+'/'+str(j)+'.jpg', 'images/noise/noise_'+str(h)+'/'+str(i)+'/'+str(j)+'.jpg', h)
 
 print("Noisify done, shutting down script.")

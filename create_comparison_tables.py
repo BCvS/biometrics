@@ -9,6 +9,23 @@ from numpy import save
 modelname = "DeepFace" #choices: [Deepface, VGG-Face, FaceNet, OpenFace]
 comparisontype = "resolution" #choices: [resolution, compression, brightness, noise]
 
+#create all necessary directories if they don't exist
+current_dir = os.getcwd()
+req_dir = current_dir + '/saved_comparison_data'
+if not os.path.exists(req_dir):
+	os.mkdir(req_dir)
+
+for directory in ['Deepface', 'VGG-Face', 'FaceNet', 'OpenFace']:
+	current_dir = os.getcwd()
+	req_dir = current_dir + '/saved_comparison_data/' + directory
+	if not os.path.exists(req_dir):
+		os.mkdir(req_dir)
+	for directory2 in ['brightness', 'compression', 'noise', 'resolution']:
+		req_dir = req_dir + '/' + directory2
+		if not os.path.exists(req_dir):
+			os.mkdir(req_dir)
+
+
 abs_starttime = time.perf_counter()
 
 print("Using the " + modelname + " model to compare " + comparisontype + ". Check if this is correct.")
