@@ -25,9 +25,9 @@ for directory in ['Deepface', 'VGG-Face', 'FaceNet', 'OpenFace']:
 	if not os.path.exists(req_dir):
 		os.mkdir(req_dir)
 	for directory2 in ['brightness', 'compression', 'noise', 'resolution']:
-		req_dir = req_dir + '/' + directory2
-		if not os.path.exists(req_dir):
-			os.mkdir(req_dir)
+		comparisondir = req_dir + '/' + directory2
+		if not os.path.exists(comparisondir):
+			os.mkdir(comparisondir)
 
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 device_lib.list_local_devices()
