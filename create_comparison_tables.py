@@ -98,7 +98,7 @@ for comparisontype in comparisontypes:
 
 	#Save results to datafile for further processing
 	data = asarray(results)
-	save('saved_comparison_data/'+comparisontype+'/'+modelname+'/original_vs_'+comparisontype+'s.npy', data)
+	save('saved_comparison_data/'+modelname+'/'+comparisontype+'/original_vs_'+comparisontype+'s.npy', data)
 	print("Data saved!")
 
 
@@ -144,7 +144,7 @@ for comparisontype in comparisontypes:
 
 		#Save results to datafile for further processing
 		data = asarray(results)
-		save('saved_comparison_data/'+comparisontype+'/'+modelname+'/'+comparisontype+'_'+str(y)+'_vs_'+comparisontype+'s.npy', data)
+		save('saved_comparison_data/'+modelname+'/'+comparisontype+'/'+comparisontype+'_'+str(y)+'_vs_'+comparisontype+'s.npy', data)
 		print("Data saved!")
 
 	totaltime = time.perf_counter() - abs_starttime
