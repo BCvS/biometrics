@@ -138,7 +138,7 @@ for comparisontype in comparisontypes:
 			starttime2 = time.perf_counter()
 
 		totaltime = time.perf_counter() - starttime
-		print(comparisontype +"s comparisons done! Total execution time for this round: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
+		print("Reference image " + comparisontype +" level " +str(y) + " comparisons done! Total execution time for this reference level: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 		totaltime = time.perf_counter() - abs_starttime
 		print("Time elapsed so far: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 
@@ -148,8 +148,8 @@ for comparisontype in comparisontypes:
 		print("Data saved!")
 
 	totaltime = time.perf_counter() - abs_starttime
-	print(comparisontype + " done! Total execution time for this comparison type: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
+	print(comparisontype + " comparison type fully done! Total execution time for this comparison type: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 
 totaltime = time.perf_counter() - abs_abs_starttime
-print("All comparisons done! Total final execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
+print("All comparison types done! Total final execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
 print("Shutting down script.")

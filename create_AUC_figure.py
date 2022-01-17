@@ -8,7 +8,7 @@ AUCgraphs =[]
 
 AUCs = []
 
-data = load('original_vs_compressions.npy')
+data = load('C:/Users/spijk/Documents/_assignment/biometrics_data/saved_comparison_data/DeepFace/compression/original_vs_compressions.npy')
 for comparison in data:
 	false_matches_upper = np.triu(comparison, 1)
 	false_matches_lower = np.tril(comparison, -1)
@@ -45,7 +45,7 @@ AUCgraphs.append(AUCs)
 
 for i in  [9,7,5,3,1]:
 	AUCs = []
-	data = load('compression_'+str(i)+'_vs_compressions.npy')
+	data = load('C:/Users/spijk/Documents/_assignment/biometrics_data/saved_comparison_data/DeepFace/compression/compression_'+str(i)+'_vs_compressions.npy')
 	for comparison in data:
 		false_matches_upper = np.triu(comparison, 1)
 		false_matches_lower = np.tril(comparison, -1)
@@ -95,28 +95,28 @@ plt.ylabel("AUC value")
 plt.show()
 
 
-data = load('compression_1_vs_compressions.npy')
-for comparison in data:
-	false_matches_upper = np.triu(comparison, 1)
-	false_matches_lower = np.tril(comparison, -1)
-	correct_matches = np.diagonal(comparison)
+# data = load('compression_1_vs_compressions.npy')
+# for comparison in data:
+# 	false_matches_upper = np.triu(comparison, 1)
+# 	false_matches_lower = np.tril(comparison, -1)
+# 	correct_matches = np.diagonal(comparison)
 
-	tprs = []
-	fprs = []
+# 	tprs = []
+# 	fprs = []
 
-	for threshold in thresholds:
-		tns_u = (false_matches_upper > threshold).sum()
-		tns_l = (false_matches_lower > threshold).sum()
-		tns = tns_u + tns_l
-		fps = 870 - tns
-		tps = (correct_matches < threshold).sum() 
-		fns = 30 - tps
+# 	for threshold in thresholds:
+# 		tns_u = (false_matches_upper > threshold).sum()
+# 		tns_l = (false_matches_lower > threshold).sum()
+# 		tns = tns_u + tns_l
+# 		fps = 870 - tns
+# 		tps = (correct_matches < threshold).sum() 
+# 		fns = 30 - tps
 
-		tpr = tps/(tps+fns)
-		fpr = fps/(fps+tns)
+# 		tpr = tps/(tps+fns)
+# 		fpr = fps/(fps+tns)
 		
-		tprs.append(tpr)
-		fprs.append(fpr)
+# 		tprs.append(tpr)
+# 		fprs.append(fpr)
 
-	plt.plot(fprs,tprs)
-	plt.show()
+# 	plt.plot(fprs,tprs)
+# 	plt.show()
