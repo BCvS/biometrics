@@ -1,9 +1,11 @@
 from deepface import DeepFace
 import cv2
-#import os
+import time
+import os
 
 folders = ['resolution', 'compression', 'brightness', 'noise']
 
+print("Creating folder structure...")
 #create folder structure for faces/original/*
 current_dir = os.getcwd()
 
@@ -45,8 +47,11 @@ for folder in folders:
 			path = os.path.join(parent_dir, directory)
 			if not os.path.exists(path):
 				os.mkdir(path)
+print("Done creating folder structure!")
 
-#create folder structure for faces/original/*
+abs_starttime = time.perf_counter()
+starttime = time.perf_counter()
+
 img_path = 'images/original/'
 img_output_path = 'faces/original'
 
@@ -56,6 +61,10 @@ for i in range(1,31):
 		img = img * 255
 		cv2.imwrite((img_output_path + '/' +str(i)+ '/' + str(j)+'.jpg'),img[:, :, ::-1])
 		print('Saved image '+ str(i) + '!')
+
+totaltime = time.perf_counter() - starttime
+print("Done with original pictures! Execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
+starttime = time.perf_counter()
 
 for folder in folders:
 	options = []
@@ -80,3 +89,10 @@ for folder in folders:
 				cv2.imwrite((img_output_path +str(i)+'/'+str(j)+'.jpg'),img[:, :, ::-1])
 				print('Saved image!')
 
+	totaltime = time.perf_counter() - starttime
+	print("Done with " + folder + " pictures! Execution time: " + str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
+	starttime = time.perf_counter()
+
+totaltime = time.perf_counter() - abs_starttime
+print("Completely done creating faces! Total execution time: " +  str(time.strftime('%H:%M:%S', time.gmtime(totaltime))))
+pritn("Shutting down script.")
