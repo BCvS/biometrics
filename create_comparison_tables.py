@@ -7,7 +7,7 @@ from numpy import asarray
 from numpy import save
 import os
 
-modelname = 'Dlib' #choices: [Deepface, VGG-Face, Facenet, OpenFace, 'Facenet512', 'ArcFace']
+modelname = 'DeepID' #choices: [Deepface, VGG-Face, Facenet, OpenFace, 'Facenet512', 'ArcFace', 'DeepID']
 
 comparisontypes= ['compression', 'resolution', 'brightness', 'noise']
 #comparisontype = "compression" #choices: [resolution, compression, brightness, noise]
@@ -19,7 +19,7 @@ req_dir = current_dir + '/saved_comparison_data'
 if not os.path.exists(req_dir):
 	os.mkdir(req_dir)
 
-for directory in ['Deepface', 'VGG-Face', 'FaceNet', 'OpenFace', 'Dlib', 'Facenet512', 'ArcFace']:
+for directory in ['Deepface', 'VGG-Face', 'FaceNet', 'OpenFace', 'Dlib', 'Facenet512', 'ArcFace', 'DeepID']:
 	current_dir = os.getcwd()
 	req_dir = current_dir + '/saved_comparison_data/' + directory
 	if not os.path.exists(req_dir):
