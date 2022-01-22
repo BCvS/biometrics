@@ -1,0 +1,24 @@
+- deepface lib is extremely inefficient, explain why
+- VGG-face is not a model, explain
+- Will make 2 large matrices for vgg-face2, one with brightness and one with noise
+
+plz do:
+- plz describe models compared (lit research)
+- check what others have done (lit research, make sure to check 2012 paper)
+- plz describe research setup, including mtcnn: dataset[1..30]->handpick_angles->apply_variables->mtcnn->image_verification_with_model
+	- explain mtcnn sometimes does not recognize face, find out and explain implications
+	- explain inneficiency of deepface in this situation
+	- explain what variable values mean for every variable
+- Evaluate results
+- Explain limitations: only 30 faces, hand-picked angles (no hard-defined angles in used db)
+- Possible future research: 
+		- use variables to create accurate representation of worst-case scenario passport photo or test photo
+		- larger dataset, 
+		- more accurate dataset with concrete angles, 
+		- add up-down angles, 
+		- more types of variables, 
+		- smaller variable transition steps,
+		- more in-depth analyse of one specific model (e.g. VGG-Face2), 
+		- direct comparison with other image recognition methodss
+
+	- Code for project available on Github

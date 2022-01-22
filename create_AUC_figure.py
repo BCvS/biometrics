@@ -67,7 +67,7 @@ for model in models:
 
 	for i in options:
 		AUCs = []
-		data = load('C:/Users/spijk/Documents/_assignment/biometrics_data/saved_comparison_data/' + model + '/'+comparisontype+'/'+comparisontype+'_'+str(i)+'_vs_'+comparisontype+'s.npy')
+		data = load(current_dir+'/saved_comparison_data/' + model + '/'+comparisontype+'/'+comparisontype+'_'+str(i)+'_vs_'+comparisontype+'s.npy')
 		for comparison in data:
 			false_matches_upper = np.triu(comparison, 1)
 			false_matches_lower = np.tril(comparison, -1)

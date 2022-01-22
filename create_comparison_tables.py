@@ -7,7 +7,7 @@ from numpy import asarray
 from numpy import save
 import os
 
-modelname = 'DeepID' #choices: [Deepface, VGG-Face, Facenet, OpenFace, 'Facenet512', 'ArcFace', 'DeepID']
+modelname = 'DeepID' #choices: [Deepface, VGG-Face, Facenet, 'Facenet512', OpenFace, 'ArcFace', 'DeepID']
 
 comparisontypes= ['compression', 'resolution', 'brightness', 'noise']
 #comparisontype = "compression" #choices: [resolution, compression, brightness, noise]
