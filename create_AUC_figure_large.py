@@ -121,14 +121,14 @@ for comparisoncounter, comparisontype in enumerate(comparisontypes):
 		else:
 			ax.set_xticks([0,1,2,3,4,5],labels=[])
 		if(modelcounter == 0 and comparisontype == 'resolution'):
-			ax.legend(labels, title="Ref image "+comparisontype, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.25, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1, labelspacing = 0.15, columnspacing=1.5, mode='expand')
+			ax.legend(labels, title="Ref image "+comparisontype, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.23, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1, labelspacing = 0.15, columnspacing=1.5, mode='expand')
 		elif(modelcounter == 0 and comparisontype == 'brightness'):
-			ax.legend(labels, title="Ref image "+comparisontype, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.25, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1.65, labelspacing = 0.15, columnspacing=1.5, mode='expand')
+			ax.legend(labels, title="Ref image "+comparisontype, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.23, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1.65, labelspacing = 0.15, columnspacing=1.5, mode='expand')
 		elif modelcounter == 0:
-			ax.legend(labels, title="Ref image "+comparisontype, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.25, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1.8, labelspacing = 0.15, columnspacing=1.5, mode='expand')
+			ax.legend(labels, title="Ref image "+comparisontype, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.23, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1.8, labelspacing = 0.15, columnspacing=1.5, mode='expand')
 
 		ax.grid()
 
-fig.tight_layout(rect=(0.02,0,1,1))
+fig.tight_layout(rect=(0.015,0,1,1), h_pad=0.25)
 fig.savefig('test.png')
 #plt.show()

@@ -1,6 +1,7 @@
-- deepface lib is extremely inefficient, explain why
-- VGG-face is not a model, explain
-- Will make 2 large matrices for vgg-face2, one with brightness and one with noise
+- deepface lib is extremely inefficient, i explain why
+- VGG-face2 is not a model, i explain
+- I will make one more comparisonchart of front-front
+- I will make 2 large matrices for vgg-face2, one with brightness and one with noise
 
 plz do:
 - plz describe models compared (lit research)
@@ -18,7 +19,7 @@ plz do:
 		- add up-down angles, 
 		- more types of variables, 
 		- smaller variable transition steps,
-		- more in-depth analyse of one specific model (e.g. VGG-Face2), 
+		- more in-depth analysis of one specific model (e.g. VGG-Face2), 
 		- direct comparison with other image recognition methodss
 
 	- Code for project available on Github
