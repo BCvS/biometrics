@@ -7,10 +7,10 @@ from numpy import asarray
 from numpy import save
 import os
 
-models = ['VGG-Face', 'Dlib', 'Facenet', 'ArcFace', 'Facenet512', 'OpenFace', 'DeepID', 'Deepface']
+models = ['DeepFace'] #['VGG-Face', 'Dlib', 'Facenet', 'ArcFace', 'Facenet512', 'OpenFace', 'DeepID', 'DeepFace']
 comparisontypes= ['compression', 'resolution', 'brightness', 'noise']
 
-for directory in ['VGG-Face', 'Dlib', 'Facenet', 'ArcFace', 'Facenet512', 'OpenFace', 'DeepID', 'Deepface']:
+for directory in ['VGG-Face', 'Dlib', 'Facenet', 'ArcFace', 'Facenet512', 'OpenFace', 'DeepID', 'DeepFace']:
 	current_dir = os.getcwd()
 	req_dir = current_dir + '/saved_comparison_data/' + directory + '/5-5'
 	if not os.path.exists(req_dir):

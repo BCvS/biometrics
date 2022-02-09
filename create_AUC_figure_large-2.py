@@ -31,7 +31,7 @@ for comparisoncounter, comparisontype in enumerate(comparisontypes):
 		AUCgraphs =[]
 		AUCs = []
 
-		data = load(current_dir + '/saved_comparison_data/' + model + '/'+comparisontype+'/original_vs_'+comparisontype+'s.npy')
+		data = load(current_dir + '/saved_comparison_data/' + model + '/5-5/'+comparisontype+'/original_vs_'+comparisontype+'s.npy')
 		for comparison in data:
 			false_matches_upper = np.triu(comparison, 1)
 			false_matches_lower = np.tril(comparison, -1)
@@ -63,7 +63,7 @@ for comparisoncounter, comparisontype in enumerate(comparisontypes):
 
 		for i in options:
 			AUCs = []
-			data = load(current_dir+'/saved_comparison_data/' + model + '/'+comparisontype+'/'+comparisontype+'_'+str(i)+'_vs_'+comparisontype+'s.npy')
+			data = load(current_dir+'/saved_comparison_data/' + model + '/5-5/'+comparisontype+'/'+comparisontype+'_'+str(i)+'_vs_'+comparisontype+'s.npy')
 			for comparison in data:
 				false_matches_upper = np.triu(comparison, 1)
 				false_matches_lower = np.tril(comparison, -1)
@@ -130,5 +130,5 @@ for comparisoncounter, comparisontype in enumerate(comparisontypes):
 		ax.grid()
 
 fig.tight_layout(rect=(0.015,0,1,1), h_pad=0.25)
-fig.savefig('front-left.png')
+fig.savefig('front-front.png')
 #plt.show()
