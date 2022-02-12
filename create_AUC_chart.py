@@ -17,7 +17,7 @@ import seaborn as sns; sns.set_theme();
 current_dir = os.getcwd()
 thresholds = np.arange(0, 1, 0.01).tolist()
 model = 'VGG-Face2'
-comparisontype = 'brightness'
+comparisontype = 'noise'
 wording = ' level'
 
 if (comparisontype=='brightness'):
@@ -202,7 +202,8 @@ norm = Normalize(vmin=lowest_AUC, vmax=1, clip=False,)
 sm = ScalarMappable(norm=norm, cmap=colormap)
 
 plt.rcParams['axes.grid'] = False #get rid of annoying deprecation warning
-subfigs[1].colorbar(sm, location='right', ax=axs1, shrink=1, fraction=cb_fraction, aspect=35, ticks=[round(x * 0.01, 2) for x in range(45, 105, 5)])
+colorbar = subfigs[1].colorbar(sm, location='right', ax=axs1, shrink=0.9, fraction=cb_fraction, aspect=35, ticks=[round(x * 0.01, 2) for x in range(45, 105, 5)])
+colorbar.ax.set_title('AUC', fontsize='large', y=1.01, weight='bold')
 
 fig.savefig(comparisontype + '_face_angle_comparison_' + color_palette + '.png')
 fig.savefig(comparisontype + '_face_angle_comparison_' + color_palette + '.svg')
