@@ -17,7 +17,7 @@ import seaborn as sns; sns.set_theme();
 current_dir = os.getcwd()
 thresholds = np.arange(0, 1, 0.01).tolist()
 model = 'VGG-Face2'
-comparisontype = 'resolution'
+comparisontype = 'brightness'
 wording = ' level'
 
 if (comparisontype=='brightness'):
