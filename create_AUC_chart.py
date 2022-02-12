@@ -17,7 +17,11 @@ import seaborn as sns; sns.set_theme();
 current_dir = os.getcwd()
 thresholds = np.arange(0, 1, 0.01).tolist()
 model = 'VGG-Face2'
-comparisontype = 'brightness'
+comparisontype = 'resolution'
+wording = ' level'
+
+if (comparisontype=='brightness'):
+	wording = ' variation'
 
 options = []
 labels = []
@@ -26,7 +30,7 @@ labels = []
 #sns.color_palette("reds", as_cmap=True)
 #sns.cubehelix_palette(start=0, rot=0.4, as_cmap=True)
 
-color_palette = 'rocket_r'
+color_palette = 'vlag'
 colormap = sns.color_palette(color_palette, as_cmap=True)
 lowest_AUC=0.45
 left_offset = 0.032
@@ -43,8 +47,8 @@ subfigs = fig.subfigures(3, 1, height_ratios=[subfig1_hr, subfig2_hr, subfig3_hr
 
 axs0 = subfigs[0].subplots(1, 9)
 subfigs[0].subplots_adjust(bottom=-0.2, top=0.75, wspace=0.1, hspace=0.1, left=left_offset, right=right_offset-0.1*(right_offset-left_offset))
-subfigs[0].supxlabel('Reference face angle', y=0.55)
-subfigs[0].suptitle(comparisontype.title() + ' variation face angle comparison', fontsize='xx-large')
+subfigs[0].supxlabel('Reference face angle', y=0.58)
+subfigs[0].suptitle(comparisontype.title() + wording+ ' and face angle comparison', fontsize='xx-large')
 
 axs1 = subfigs[1].subplots(9, 9)
 #subfigs[1].set_facecolor('0.9')
@@ -52,8 +56,8 @@ subfigs[1].supylabel('Test face angle', x=0.005)
 subfigs[1].subplots_adjust(bottom=0.03, top=0.97, wspace=0.1, hspace=0.1, left=left_offset, right=right_offset)
 
 axs2 = subfigs[2].subplots(1, 2)
-subfigs[2].supxlabel('Reference brightness level', y=0)
-subfigs[2].supylabel('Test brightness level', x=0.11, y=0.55)
+subfigs[2].supxlabel('Reference '+comparisontype+' level', y=0)
+subfigs[2].supylabel('Test '+comparisontype+' level', x=0.11, y=0.55)
 subfigs[2].subplots_adjust(left=0.18,right=0.82, bottom=0.2, top=0.92, wspace=0.82)
 
 
@@ -200,5 +204,6 @@ sm = ScalarMappable(norm=norm, cmap=colormap)
 plt.rcParams['axes.grid'] = False #get rid of annoying deprecation warning
 subfigs[1].colorbar(sm, location='right', ax=axs1, shrink=1, fraction=cb_fraction, aspect=35, ticks=[round(x * 0.01, 2) for x in range(45, 105, 5)])
 
-fig.savefig(comparisontype + '_face_angle_comparison_' + color_palette)
+fig.savefig(comparisontype + '_face_angle_comparison_' + color_palette + '.png')
+fig.savefig(comparisontype + '_face_angle_comparison_' + color_palette + '.svg')
 #plt.show()
