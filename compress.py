@@ -3,7 +3,7 @@ from PIL import Image
 import os	
 
 #The compression function takes a 'quality' variable to determine compression level. 
-#quality 100 is best, 90 is original, and 1 is lowest. The values below represent quality options.
+#quality 100 is best, 95 is original, and 1 is lowest. The values below represent quality options.
 compression_values = [1,3,5,7,9]
 current_dir = os.getcwd()
 
