@@ -62,4 +62,4 @@ After running these two scripts, similarity scores should have been saved the sa
 
 **Done!** All the figures should now be saved in the _final_images folder. 
 
-If you want to try some different colour palettes for the AUC table in the second script of step 4, I have included some color palette example images in /images/test_colour_palettes.
+If you want to try some different colour palettes for the AUC table in the second script of step 4, I have included some colour palette example images in /images/test_colour_palettes.
