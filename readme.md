@@ -60,23 +60,6 @@ After running these two scripts, similarity scores should have been saved the sa
 - For the graphs, run create_AUC_graphs_figure.py. Make sure to first update the variables *models*, *reference_angle_number*, and *test_angle_number* and the distortion values from step 1 if you have changed any of them so far. This script creates a figure with graphs that show the accuracies of all models at all distortion values.
 - For the tables, run create_AUC_tables_chart.py. For this one, choose the comparison type you want to view, and update distortion values if changed earlier. This script creates a single large table comprised of multiple tiny tables. The tables show the AUC values for the VGG-Face2 algorithm for every distortion value combination and every face angle combination. This is mainly possible thanks to the low excecution time of the VGGFace2_AUC_comparison_tables_all_face-angles.py script in the previous step.
 
-All the figures should now be saved in the _final_images folder. If you want to try some different colour palettes for the AUC table in the second script of step 4, I have included some color palette example images in /images/test_colour_palettes.
+**Done!** All the figures should now be saved in the _final_images folder. 
 
-Publishing in StackEdit makes it simple for you to publish online your files. Once you're happy with a file, you can publish it to different hosting platforms like **Blogger**, **Dropbox**, **Gist**, **GitHub**, **Google Drive**, **WordPress** and **Zendesk**. With [Handlebars templates](http://handlebarsjs.com/), you have full control over what you export.
-
-> Before starting to publish, you must link an account in the **Publish** sub-menu.
-
-## Publish a File
-
-You can publish your file by opening the **Publish** sub-menu and by clicking **Publish to**. For some locations, you can choose between the following formats:
-
-- Markdown: publish the Markdown text on a website that can interpret it (**GitHub** for instance),
-- HTML: publish the file converted to HTML via a Handlebars template (on a blog for example).
-
-And this will produce a flow chart:
-
-```mermaid
-graph LR
-A[PUT database] -- handpick --> B(30 images<br/>9 angles)
-B --> D(Rhombus)
-```
+If you want to try some different colour palettes for the AUC table in the second script of step 4, I have included some color palette example images in /images/test_colour_palettes.
