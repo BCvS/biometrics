@@ -15,6 +15,11 @@ from keras_vggface.utils import preprocess_input
 import tensorflow as tf
 from tensorflow.python.client import device_lib
 
+brightness_options = [0.1,0.5,1.5,3,5]
+compression_options = [9,7,5,3,1]
+noise_options = [0.1, 0.3, 0.5, 0.7, 1]
+resolution_options = [1024, 512, 256, 128, 64]
+
 modelname = 'VGG-Face2'
 comparisontypes= ['compression', 'resolution', 'brightness', 'noise']
 
@@ -68,13 +73,13 @@ for reference in range(1,10):
 
 			options = []
 			if (comparisontype == 'resolution'):
-				options = [1024, 512, 256, 128, 64]
+				options = resolution_options
 			elif (comparisontype == 'compression'):
-				options = [9,7,5,3,1]
+				options = compression_options
 			elif (comparisontype == 'brightness'):
-				options = [0.1,0.5,1.5,3,5]
+				options = brightness_options
 			elif (comparisontype == 'noise'):
-				options = [0.1, 0.3, 0.5, 0.7, 1];
+				options = noise_options
 
 			#This is the main reason why this code is more efficient than 'create_comparison_tables.py': here we calculate all the embeddings of the current face picture set once.
 			starttime2= time.perf_counter()

@@ -15,6 +15,11 @@ test_angle_number = 5
 models = ['DeepFace'] #can be extended with: ['VGG-Face', 'Dlib', 'Facenet', 'ArcFace', 'Facenet512', 'OpenFace', 'DeepID', 'DeepFace']
 comparisontypes= ['brightness', 'compression', 'noise', 'resolution']
 
+brightness_options = [0.1,0.5,1.5,3,5]
+compression_options = [9,7,5,3,1]
+noise_options = [0.1, 0.3, 0.5, 0.7, 1]
+resolution_options = [1024, 512, 256, 128, 64]
+
 #For all the models, create a directory structure to save the comparison tables in, if it does not already exists.
 for directory in models:
 	current_dir = os.getcwd()
@@ -56,13 +61,13 @@ for modelname in models:
 
 		options = []
 		if (comparisontype == 'resolution'):
-			options = [1024, 512, 256, 128, 64]
+			options = resolution_options
 		elif (comparisontype == 'compression'):
-			options = [9,7,5,3,1]
+			options = compression_options
 		elif (comparisontype == 'brightness'):
-			options = [0.1,0.5,1.5,3,5]
+			options = brightness_options
 		elif (comparisontype == 'noise'):
-			options = [0.1, 0.3, 0.5, 0.7, 1];
+			options = noise_options
 
 		#do main task, start by comparing original reference angle to original test angle
 		starttime = time.perf_counter()

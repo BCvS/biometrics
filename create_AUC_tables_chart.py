@@ -12,6 +12,11 @@ import seaborn as sns; sns.set_theme();
 
 comparisontype = 'resolution' #Choose the comparison type: 'brightness', 'noise', 'compression' or 'resolution'
 
+brightness_options = [0.1,0.5,1.5,3,5]
+compression_options = [9,7,5,3,1]
+noise_options = [0.1, 0.3, 0.5, 0.7, 1]
+resolution_options = [1024, 512, 256, 128, 64]
+
 #Functional variables
 current_dir = os.getcwd()
 model = 'VGG-Face2'
@@ -58,17 +63,14 @@ subfigs[2].subplots_adjust(left=0.18,right=0.82, bottom=0.2, top=0.92, wspace=0.
 
 #Fill in labels and options based on comparison type choice
 if (comparisontype == 'resolution'):
-	options = [1024, 512, 256, 128, 64]
-	labels = ['2048', '1024', '512', '256', '128', '64']
+	options = resolution_options
 elif (comparisontype == 'compression'):
-	options = [9,7,5,3,1]
-	labels = ['100', '9', '7', '5', '3', '1']
+	options = compression_options
 elif (comparisontype == 'brightness'):
-	options = [0.1,0.5,1.5,3,5]
-	labels = ['0.1','0.5','1','1.5','3','5']
+	options = brightness_options
 elif (comparisontype == 'noise'):
-	options = [0.1, 0.3, 0.5, 0.7, 1];
-	labels = ['0', '0.1', '0.3', '0.5', '0.7', '1']
+	options = noise_options
+labels = list(map(str, options))
 
 #Load in example images for every face angle
 for i in range(0,9):

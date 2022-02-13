@@ -9,6 +9,11 @@ import os
 reference_angle_number = 5
 test_angle_number = 5
 
+brightness_options = [0.1,0.5,1.5,3,5]
+compression_options = [9,7,5,3,1]
+noise_options = [0.1, 0.3, 0.5, 0.7, 1]
+resolution_options = [1024, 512, 256, 128, 64]
+
 current_dir = os.getcwd()
 #Thresholds used to calculate ROC graphs. True Positive, False Positive, True Negative, and False Negative rates are calculated for every threshold. The more threshold values, the more accurate the ROC graphs.
 thresholds = np.arange(0, 1, 0.01).tolist()
@@ -18,17 +23,14 @@ comparisontype = 'noise' #other options: 'compression', 'resolution', 'brightnes
 options = []
 labels = []
 if (comparisontype == 'resolution'):
-	options = [1024, 512, 256, 128, 64]
-	labels = ['Original', '1024', '512', '256', '128', '64']
+	options = resolution_options
 elif (comparisontype == 'compression'):
-	options = [9,7,5,3,1]
-	labels = ['Original', '9', '7', '5', '3', '1']
+	options = compression_options
 elif (comparisontype == 'brightness'):
-	options = [0.1,0.5,1.5,3,5]
-	labels = ['0.1','0.5','Original','1.5','3','5']
+	options = brightness_options
 elif (comparisontype == 'noise'):
-	options = [0.1, 0.3, 0.5, 0.7, 1];
-	labels = ['Original', '0.1', '0.3', '0.5', '0.7', '1']
+	options = noise_options
+labels = list(map(str, options))
 
 AUCgraphs =[]
 AUCs = []
