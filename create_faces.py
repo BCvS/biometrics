@@ -15,10 +15,6 @@ req_dir = current_dir+'/faces'
 if not os.path.exists(req_dir):
 	os.mkdir(req_dir)
 
-req_dir = current_dir+'/original'
-if not os.path.exists(req_dir):
-	os.mkdir(req_dir)
-
 for i in range(1,31):
 	directory = str(i)
 	path = os.path.join(req_dir, directory)
