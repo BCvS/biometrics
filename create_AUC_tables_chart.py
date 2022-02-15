@@ -20,7 +20,7 @@ resolution_options = [1024, 512, 256, 128, 64]
 #Functional variables
 current_dir = os.getcwd()
 model = 'VGG-Face2'
-thresholds = np.arange(0, 1, 0.01).tolist()
+thresholds = np.arange(0, 1, 0.0001).tolist()
 options = []
 labels = []
 
@@ -40,7 +40,13 @@ subfig3_hr = 3.4
 total_height_ratio = subfig1_hr + subfig2_hr + subfig3_hr
 wording = ' level'
 if (comparisontype=='brightness'):
-	wording = ' variation'
+	wording = ' (\u03B1 value)'
+if (comparisontype=='noise'):
+	wording = ' (\u03C3 value)'
+if (comparisontype=='compression'):
+	wording = ' (image quality)'
+if (comparisontype=='resolution'):
+	wording = ' (pixel width)'
 
 #Create figure and split into three stacked subfigures. One for the example images, one for the AUC grid, one for a magnified AUC table.
 fig = plt.figure(constrained_layout=False, figsize=(9.5,12.6))
@@ -57,20 +63,24 @@ subfigs[1].supylabel('Test face angle', x=0.005)
 subfigs[1].subplots_adjust(bottom=0.03, top=0.97, wspace=0.1, hspace=0.1, left=left_offset, right=right_offset)
 
 axs2 = subfigs[2].subplots(1, 2)
-subfigs[2].supxlabel('Reference '+comparisontype+' level', y=0)
-subfigs[2].supylabel('Test '+comparisontype+' level', x=0.11, y=0.55)
+subfigs[2].supxlabel('Reference '+comparisontype+wording, y=0)
+subfigs[2].supylabel('Test '+comparisontype+'\n'+wording, x=0.09, y=0.55)
 subfigs[2].subplots_adjust(left=0.18,right=0.82, bottom=0.2, top=0.92, wspace=0.82)
 
 #Fill in labels and options based on comparison type choice
 if (comparisontype == 'resolution'):
 	options = resolution_options
+	labels = ['2048'] + list(map(str, options))
 elif (comparisontype == 'compression'):
 	options = compression_options
+	labels = ['95'] + list(map(str, options))
 elif (comparisontype == 'brightness'):
 	options = brightness_options
+	labels = list(map(str, options))
+	labels.insert(2, '1')
 elif (comparisontype == 'noise'):
 	options = noise_options
-labels = list(map(str, options))
+	labels = ['0'] + list(map(str, options))
 
 #Load in example images for every face angle
 for i in range(0,9):
@@ -85,7 +95,7 @@ for i in range(1,10):
 	for j in range(1,10):
 		AUCgraphs =[]
 		AUCs = []
-		data = load(current_dir + '/saved_comparison_data/'+model+'/'+str(i)+'-'+str(j)+'/'+comparisontype+'/original_vs_'+comparisontype+'s.npy')
+		data = load(current_dir+'/saved_comparison_data/'+model+'/'+str(i)+'-'+str(j)+'/'+comparisontype+'/original_vs_'+comparisontype+'s.npy')
 		for comparison in data:
 			false_matches_upper = np.triu(comparison, 1)
 			false_matches_lower = np.tril(comparison, -1)
@@ -111,6 +121,8 @@ for i in range(1,10):
 			area = np.trapz(tprs, x=fprs)
 			AUCs.append(area)
 
+		#Brightness values range between 0.1 to 5. The neutral ('original') value for brightness is 1, but we loaded it in first. We would like the brightness values in the graphs
+		#to be in chronological order, therefore we take the 'brightness 1' values from the start of the list, and insert them back into index 2.
 		if comparisontype == 'brightness':
 			AUCs.insert(2, AUCs.pop(0))
 		AUCgraphs.append(AUCs)
@@ -145,8 +157,6 @@ for i in range(1,10):
 				area = np.trapz(tprs, x=fprs)
 				AUCs.append(area)
 
-			#Brightness values range between 0.1 to 5. The neutral ('original') value for brightness is 1, but we loaded it in first. We would like the brightness values in the graphs
-			#to be in chronological order, therefore we take the 'brightness 1' values from the start of the list, and insert them back into index 2.
 			if comparisontype == 'brightness':
 				AUCs.insert(2, AUCs.pop(0))
 			AUCgraphs.append(AUCs)

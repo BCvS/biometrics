@@ -2,7 +2,7 @@
 from PIL import Image, ImageEnhance
 import os	
 
-#Mininimum brightness is 0, maximum brightness is 5.
+#Mininimum brightness is 0 (pitch black), there is no maximum brightness.
 options = [0.1,0.5,1.5,3,5]
 current_dir = os.getcwd()
 

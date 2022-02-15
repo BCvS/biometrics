@@ -8,7 +8,7 @@ import os
 #Reference and test angle numbers. Please keep in mind that the chosen specific combination has to have been done by 'create_comparison_tables.py' 
 #By default, combinations 5-1 and 5-5 have been done.
 reference_angle_number = 5
-test_angle_number = 5
+test_angle_number = 1
 
 #Models to include. The default set below has been ordered by accuracy from high to low.
 models = ['VGG-Face2','VGG-Face', 'Dlib', 'Facenet', 'ArcFace', 'Facenet512', 'OpenFace', 'DeepID', 'Deepface']
@@ -20,8 +20,8 @@ noise_options = [0.1, 0.3, 0.5, 0.7, 1]
 resolution_options = [1024, 512, 256, 128, 64]
 
 current_dir = os.getcwd()
-#Thresholds used to calculate ROC graphs. True Positive, False Positive, True Negative, and False Negative rates are calculated for every threshold. The more threshold values, the more accurate the ROC graphs.
-thresholds = np.arange(0, 1, 0.01).tolist()
+#Thresholds used to calculate ROC graphs. True Positive, False Positive, True Negative, and False Negative rates are calculated for every threshold. The more threshold values, the more accurate the ROC graphs, but the longer the script will take.
+thresholds = np.arange(0, 1, 0.0001).tolist()
 
 options = []
 labels = []
@@ -30,13 +30,21 @@ fig, axs = plt.subplots(len(models),4, figsize=(12,15.5))
 for comparisoncounter, comparisontype in enumerate(comparisontypes):
 	if (comparisontype == 'resolution'):
 		options = resolution_options
+		labels = ['2048'] + list(map(str, options))
+		extra_text = 'pixel width'
 	elif (comparisontype == 'compression'):
 		options = compression_options
+		labels = ['95'] + list(map(str, options))
+		extra_text = ''
 	elif (comparisontype == 'brightness'):
 		options = brightness_options
+		labels = list(map(str, options))
+		labels.insert(2, '1')
+		extra_text = ' \u03B1'
 	elif (comparisontype == 'noise'):
 		options = noise_options
-	labels = list(map(str, options))
+		labels = ['0'] + list(map(str, options))
+		extra_text = ' \u03C3'
 
 	for modelcounter, model in enumerate(models):
 		AUCgraphs =[]
@@ -63,7 +71,7 @@ for comparisoncounter, comparisontype in enumerate(comparisontypes):
 				tpr = tps/(tps+fns)
 				fpr = fps/(fps+tns)
 				
-				tprs.append(tpr)
+				tprs.append(tpr)	
 				fprs.append(fpr)
 
 			area = np.trapz(tprs, x=fprs)
@@ -122,21 +130,24 @@ for comparisoncounter, comparisontype in enumerate(comparisontypes):
 		if comparisoncounter == 0:
 			ax.set_title(model, rotation=90, x=-2.1*box.width, y=box.height*5.9, verticalalignment='center', size='x-large', fontweight='bold')
 			ax.set_position([box.x0, box.y0, box.width, box.height])
-			ax.set_ylabel("AUC value", size='large')
+			ax.set_ylabel('AUC value', size='large')
 			ax.set_yticks([0,0.25,0.5,0.75,1],labels=[0,0.25,0.5,0.75,1],size='large')
 		else: 
 			ax.set_yticks([0,0.25,0.5,0.75,1],labels=[])
 		if (modelcounter == len(models)-1):
 			ax.set_xticks([0,1,2,3,4,5],labels=labels,size='large')
-			ax.set_xlabel("Test image " + comparisontype, size='large')
+			if(comparisontype =='resolution'):
+				ax.set_xlabel('Test image '+extra_text, size='large')
+			else:
+				ax.set_xlabel('Test image '+comparisontype+extra_text, size='large')
 		else:
 			ax.set_xticks([0,1,2,3,4,5],labels=[])
 		if(modelcounter == 0 and comparisontype == 'resolution'):
-			ax.legend(labels, title="Ref image "+comparisontype, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.23, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1, labelspacing = 0.15, columnspacing=1.5, mode='expand')
+			ax.legend(labels, title='Ref image '+extra_text, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.23, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1, labelspacing = 0.15, columnspacing=1.5, mode='expand')
 		elif(modelcounter == 0 and comparisontype == 'brightness'):
-			ax.legend(labels, title="Ref image "+comparisontype, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.23, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1.65, labelspacing = 0.15, columnspacing=1.5, mode='expand')
+			ax.legend(labels, title='Ref image '+comparisontype+extra_text, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.23, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1.65, labelspacing = 0.15, columnspacing=1.5, mode='expand')
 		elif modelcounter == 0:
-			ax.legend(labels, title="Ref image "+comparisontype, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.23, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1.8, labelspacing = 0.15, columnspacing=1.5, mode='expand')
+			ax.legend(labels, title='Ref image '+comparisontype+extra_text, title_fontsize='large', fontsize='large', loc='upper center', bbox_to_anchor=(0, 1.23, 1.0, 0.5), ncol=3, handleheight=0.1, handlelength=1.8, labelspacing = 0.15, columnspacing=1.5, mode='expand')
 
 		ax.grid()
 
@@ -144,5 +155,5 @@ fig.suptitle('Reference face angle '+str(reference_angle_number)+' vs test face 
 fig.tight_layout(rect=(0.015,0,1,1), h_pad=0.25)
 fig.savefig(current_dir+'/_final_images/png/AUC-graphs_for_reference_angle_'+str(reference_angle_number)+'_and_test_angle_'+str(test_angle_number)+'.png')
 fig.savefig(current_dir+'/_final_images/svg/AUC-graphs_for_reference_angle_'+str(reference_angle_number)+'_and_test_angle_'+str(test_angle_number)+'.svg')
-print("Done! AUC graphs figure saved in _final_images.")
+print('Done! AUC graphs figure saved in _final_images.')
 #plt.show()
