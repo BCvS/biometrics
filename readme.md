@@ -4,6 +4,8 @@ In this project, several face recognition algorithms were tested for accuracy at
 
 ## Process
 
+![face_recognition_setup](https://user-images.githubusercontent.com/7373832/154197853-bd8002d8-89a1-40b5-8b0b-b8f577645997.jpg)
+
 30 faces at 9 different angles each were hand-picked from the PUT face image dataset (Andrzej Kasinski, Andrzej Florek, Adam Schmidt, 2008). 
 
 Images were distorted by applying one of the following 4 effects at varying degrees:
@@ -51,8 +53,8 @@ If you wanted to play around with the endresults you could, for example, change 
 2. Then to extract the faces, run extract_faces.py. This process takes some time, but saves a lot of it later on.
 
 3. To determine and save the similarity scores, you have to run 2 scripts that roughly do the same thing. 
-- First, you can change the the variables *models*, *reference_angle_number* and *test_angle_number* in the create_comparison_tables.py to your liking, then run the script. If you changed the distortion strengths before, make sure to change them here accordingly as well in at the top of the script. **The script itself is slow and can take up to a day to execute on a GTX 3090, if all *models* are included.** Ultimately, the deepface library is inefficient for a large-scale comparison project like this because of technicalities.
-- The latter becomes clear once you run the second script, VGGFace2_AUC_comparison_tables_all_face-angles.py. Once again, make sure the distortion strengths are the same as in the previous step. This script does the same thing as the previous one, except for that it calculates similarity scores for a single model, namely VGG-Face2. Or rather, resnet50 trained of the VGG-Face2 dataset. It does not use the deepface library but builds the resnet50 model manually. This speeds up the process by such a large factor that we can easily calculate all 9 face angle comparisons for all 4 distortion types in a matter of minutes!
+- First, you can change the the variables *models*, *reference_angle_number* and *test_angle_number* in the create_comparison_tables.py to your liking, then run the script. If you changed the distortion strengths before, make sure to change them here accordingly as well in at the top of the script. **The script itself is slow and can take up to a day to execute on a GTX 3090, if all *models* are included.** The deepface library function verify() is inefficient for a large-scale comparison project like this, and using was a technical mistake. Instead, represent() should have been used.
+- Then run the second script, VGGFace2_AUC_comparison_tables_all_face-angles.py. Once again, make sure the distortion strengths are the same as in the previous step. This script does the same thing as the previous one, except for that it calculates similarity scores for just a single model, namely VGG-Face2. More specifically, it implements a ResNet-50 model trained on the VGG-Face2 dataset. It does not use the deepface library but builds the resnet50 model manually. This speeds up the process by such a large factor that we can easily calculate all 9 face angle comparisons for all 4 distortion types in a matter of minutes!
 
 After running these two scripts, similarity scores should have been saved the saved_comparison_data folder. 
 
