@@ -4,7 +4,7 @@ In this project, several face recognition algorithms were tested for accuracy at
 
 ## Process
 
-![face_recognition_setup](https://user-images.githubusercontent.com/7373832/154197853-bd8002d8-89a1-40b5-8b0b-b8f577645997.jpg)
+![face_recognition_setup](https://github.com/BCvS/biometrics/blob/main/face_recognition_setup.jpg)
 
 30 faces at 9 different angles each were hand-picked from the PUT face image dataset (Andrzej Kasinski, Andrzej Florek, Adam Schmidt, 2008). 
 
